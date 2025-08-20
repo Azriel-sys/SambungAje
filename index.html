@@ -3,13 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Media Sosial Sederhana</title>
+    <title>Sambung Aje - Media Sosial Sederhana</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
     <style>
-      /* Variabel CSS untuk tema */
       :root {
         --bg-primary: #fff;
         --bg-secondary: #f8f9fa;
@@ -27,7 +26,6 @@
         --message-bg-own: #d9fdd3;
       }
 
-      /* Dark mode variabel */
       [data-theme="dark"] {
         --bg-primary: #121212;
         --bg-secondary: #1a1a1a;
@@ -41,7 +39,6 @@
         --message-bg-own: #015c4b;
       }
 
-      /* Reset dan gaya dasar */
       * {
         margin: 0;
         padding: 0;
@@ -66,14 +63,12 @@
         cursor: pointer;
       }
 
-      /* Container utama */
       .container {
         max-width: 100%;
         margin: 0 auto;
-        padding-bottom: 60px; /* Ruang untuk navbar bawah */
+        padding-bottom: 60px;
       }
 
-      /* Header */
       header {
         background-color: var(--bg-primary);
         border-bottom: 1px solid var(--border);
@@ -98,7 +93,6 @@
         gap: 15px;
       }
 
-      /* Form styles */
       .form-container {
         max-width: 400px;
         margin: 40px auto;
@@ -183,11 +177,6 @@
         background-color: #f5f5f5;
       }
 
-      .btn-google img {
-        width: 18px;
-        height: 18px;
-      }
-
       .divider {
         display: flex;
         align-items: center;
@@ -211,7 +200,6 @@
         margin-left: 0.5em;
       }
 
-      /* Post styles */
       .post {
         background-color: var(--card-bg);
         border: 1px solid var(--border);
@@ -327,7 +315,6 @@
         font-weight: bold;
       }
 
-      /* Upload modal */
       .modal {
         display: none;
         position: fixed;
@@ -365,7 +352,6 @@
         color: var(--text-primary);
       }
 
-      /* Profile page */
       .profile-header {
         padding: 20px;
         display: flex;
@@ -573,7 +559,6 @@
         gap: 5px;
       }
 
-      /* Bottom navigation */
       .nav-bottom {
         position: fixed;
         bottom: 0;
@@ -604,7 +589,6 @@
         margin-bottom: 3px;
       }
 
-      /* Top navigation for desktop */
       .nav-top-menu {
         display: none;
       }
@@ -626,7 +610,6 @@
         }
       }
 
-      /* Chat styles */
       .chat-container {
         position: fixed;
         bottom: 80px;
@@ -837,7 +820,6 @@
         justify-content: center;
       }
 
-      /* Utility classes */
       .hidden {
         display: none !important;
       }
@@ -850,7 +832,6 @@
         margin-top: 20px;
       }
 
-      /* Dark mode toggle */
       .theme-toggle {
         background: none;
         border: none;
@@ -859,7 +840,6 @@
         cursor: pointer;
       }
 
-      /* Responsive styles */
       @media (min-width: 768px) {
         .container {
           max-width: 600px;
@@ -895,7 +875,6 @@
         }
       }
 
-      /* Animations */
       @keyframes fadeIn {
         from {
           opacity: 0;
@@ -925,7 +904,6 @@
         }
       }
 
-      /* Loading spinner */
       .spinner {
         border: 3px solid #f3f3f3;
         border-top: 3px solid var(--accent);
@@ -945,7 +923,6 @@
         }
       }
 
-      /* Post detail modal */
       .post-detail {
         display: flex;
         flex-direction: column;
@@ -1003,6 +980,7 @@
 
       .post-detail-caption {
         margin-bottom: 15px;
+        word-break: break-word;
       }
 
       .post-detail-comments {
@@ -1013,16 +991,63 @@
         margin-bottom: 10px;
         padding-bottom: 10px;
         border-bottom: 1px solid var(--border);
+        word-break: break-word;
       }
 
       .post-detail-comment-user {
         font-weight: bold;
         margin-right: 5px;
       }
+
+      .storage-notification {
+        position: fixed;
+        bottom: 100px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #ff9800;
+        color: white;
+        padding: 12px 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        z-index: 1000;
+        max-width: 90%;
+        text-align: center;
+        display: none;
+      }
+
+      .chat-follow-btn {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background: var(--accent);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        padding: 2px 8px;
+        font-size: 0.7rem;
+        cursor: pointer;
+      }
+
+      .toast-notification {
+        position: fixed;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 30px;
+        min-width: 220px;
+        background: #323232;
+        color: #fff;
+        padding: 14px 24px;
+        border-radius: 8px;
+        font-size: 1rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        z-index: 9999;
+        display: none;
+        align-items: center;
+        gap: 10px;
+      }
     </style>
   </head>
   <body>
-    <!-- Header dengan logo dan navigasi -->
     <header>
       <div class="logo">Sambung Aje</div>
       <div class="nav-top">
@@ -1051,12 +1076,10 @@
       </div>
     </header>
 
-    <!-- Container utama -->
     <div class="container">
-      <!-- Halaman Login -->
       <div id="loginPage" class="hidden">
         <div class="form-container">
-          <h2 class="form-title">Masuk ke Sogram</h2>
+          <h2 class="form-title">Masuk ke Sambung Aje</h2>
           <form id="loginForm">
             <div class="form-group">
               <label for="loginEmail">Email atau Username</label>
@@ -1114,7 +1137,6 @@
         </div>
       </div>
 
-      <!-- Halaman Register -->
       <div id="registerPage" class="hidden">
         <div class="form-container">
           <h2 class="form-title">Buat Akun Baru</h2>
@@ -1160,7 +1182,7 @@
             >
               <path
                 fill="#FFC107"
-                d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"
+                d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"
               />
               <path
                 fill="#FF3D00"
@@ -1184,14 +1206,10 @@
         </div>
       </div>
 
-      <!-- Halaman Feed/Home -->
       <div id="homePage" class="hidden">
-        <div id="postsContainer">
-          <!-- Postingan akan dimuat di sini melalui JavaScript -->
-        </div>
+        <div id="postsContainer"></div>
       </div>
 
-      <!-- Halaman Upload -->
       <div id="uploadPage" class="hidden">
         <div class="form-container">
           <h2 class="form-title">Unggah Foto Baru</h2>
@@ -1220,7 +1238,6 @@
         </div>
       </div>
 
-      <!-- Halaman Profil -->
       <div id="profilePage" class="hidden">
         <div class="profile-header">
           <div class="profile-avatar-container">
@@ -1278,26 +1295,20 @@
           </div>
         </div>
         <div class="profile-divider"></div>
-        <div class="profile-posts" id="profilePosts">
-          <!-- Postingan profil akan dimuat di sini -->
-        </div>
+        <div class="profile-posts" id="profilePosts"></div>
       </div>
     </div>
 
-    <!-- Modal untuk preview gambar -->
     <div class="modal" id="imageModal">
       <div class="modal-content">
         <div class="modal-header">
           <h2>Detail Postingan</h2>
           <button class="modal-close">&times;</button>
         </div>
-        <div class="post-detail" id="postDetail">
-          <!-- Detail postingan akan dimuat di sini -->
-        </div>
+        <div class="post-detail" id="postDetail"></div>
       </div>
     </div>
 
-    <!-- Modal untuk upload foto profil -->
     <div class="modal" id="avatarModal">
       <div class="modal-content">
         <div class="modal-header">
@@ -1325,7 +1336,6 @@
       </div>
     </div>
 
-    <!-- Navigasi Bawah untuk Mobile -->
     <div class="nav-bottom">
       <div class="nav-item active" data-page="homePage">
         <i class="fas fa-home nav-icon"></i>
@@ -1341,13 +1351,11 @@
       </div>
     </div>
 
-    <!-- Chat Toggle Button -->
     <button class="chat-toggle hidden" id="chatToggle">
       <i class="fas fa-comment"></i>
       <span class="chat-notification hidden" id="chatNotification">3</span>
     </button>
 
-    <!-- Chat Container -->
     <div class="chat-container" id="chatContainer">
       <div class="chat-header">
         <div class="chat-title">Pesan</div>
@@ -1355,12 +1363,8 @@
           <i class="fas fa-times"></i>
         </button>
       </div>
-      <div class="chat-users" id="chatUsers">
-        <!-- Daftar user chat akan dimuat di sini -->
-      </div>
-      <div class="chat-messages" id="chatMessages">
-        <!-- Pesan akan dimuat di sini -->
-      </div>
+      <div class="chat-users" id="chatUsers"></div>
+      <div class="chat-messages" id="chatMessages"></div>
       <div class="chat-input-container">
         <input
           type="text"
@@ -1374,39 +1378,25 @@
       </div>
     </div>
 
-    <!-- Toast Notification -->
-    <div
-      id="toastNotification"
-      style="
-        position: fixed;
-        left: 50%;
-        transform: translateX(-50%);
-        bottom: 30px;
-        min-width: 220px;
-        background: #323232;
-        color: #fff;
-        padding: 14px 24px;
-        border-radius: 8px;
-        font-size: 1rem;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-        z-index: 9999;
-        display: none;
-        align-items: center;
-        gap: 10px;
-      "
-    >
+    <div class="storage-notification" id="storageNotification">
+      <i class="fas fa-info-circle"></i>
+      <span>Akun dan data hanya tersimpan di perangkat ini</span>
+    </div>
+
+    <div class="toast-notification" id="toastNotification">
       <i class="fas fa-bell"></i>
       <span id="toastMessage"></span>
     </div>
+
     <script>
-      // Data contoh untuk demo
+      // Data storage
       let users = JSON.parse(localStorage.getItem("users")) || [];
       let posts = JSON.parse(localStorage.getItem("posts")) || [];
       let currentUser = JSON.parse(localStorage.getItem("currentUser")) || null;
-      let isPublicMode = localStorage.getItem("isPublicMode") !== "false"; // Default true (public)
+      let isPublicMode = localStorage.getItem("isPublicMode") !== "false";
       let chats = JSON.parse(localStorage.getItem("chats")) || [];
       let currentChatUser = null;
-      let viewingProfileUserId = null; // Untuk melihat profil user lain
+      let viewingProfileUserId = null;
 
       // DOM Elements
       const themeToggle = document.getElementById("themeToggle");
@@ -1425,10 +1415,10 @@
       const chatSend = document.getElementById("chatSend");
       const chatNotification = document.getElementById("chatNotification");
       const profileAvatarEdit = document.getElementById("profileAvatarEdit");
-      const profileAvatarInput = document.getElementById("profileAvatarInput");
       const avatarModal = document.getElementById("avatarModal");
       const avatarUpload = document.getElementById("avatarUpload");
       const avatarSave = document.getElementById("avatarSave");
+      const avatarDelete = document.getElementById("avatarDelete");
       const followButton = document.getElementById("followButton");
       const profileBio = document.getElementById("profileBio");
       const profileBioText = document.getElementById("profileBioText");
@@ -1437,6 +1427,11 @@
       const profileBioSave = document.getElementById("profileBioSave");
       const profileBioCancel = document.getElementById("profileBioCancel");
       const navTopMenuItems = document.querySelectorAll(".nav-top-menu-item");
+      const storageNotification = document.getElementById(
+        "storageNotification"
+      );
+      const toastNotification = document.getElementById("toastNotification");
+      const toastMessage = document.getElementById("toastMessage");
 
       // Pages
       const loginPage = document.getElementById("loginPage");
@@ -1460,154 +1455,160 @@
 
       // Initialize the app
       function init() {
-        // Check if we have users, if not create a demo user
+        closeAllOverlays();
+
         if (users.length === 0) {
-          const demoUser = {
-            id: 1,
-            email: "demo@example.com",
-            username: "demo",
-            password: "password", // In a real app, this would be hashed
-            avatar: "https://via.placeholder.com/100",
-            bio: "Ini adalah akun demo",
-            followers: 100,
-            following: 50,
-            isOnline: true,
-            followersList: [2, 3],
-            followingList: [2, 3],
-          };
-
-          const demoUser2 = {
-            id: 2,
-            email: "user2@example.com",
-            username: "sarah_",
-            password: "password",
-            avatar: "https://i.pravatar.cc/150?u=2",
-            bio: "Hai! Saya Sarah",
-            followers: 250,
-            following: 120,
-            isOnline: true,
-            followersList: [1, 3],
-            followingList: [1],
-          };
-
-          const demoUser3 = {
-            id: 3,
-            email: "user3@example.com",
-            username: "john_doe",
-            password: "password",
-            avatar: "https://i.pravatar.cc/150?u=3",
-            bio: "Photographer & traveler",
-            followers: 520,
-            following: 210,
-            isOnline: false,
-            followersList: [1, 2],
-            followingList: [1],
-          };
-
-          users.push(demoUser, demoUser2, demoUser3);
-          localStorage.setItem("users", JSON.stringify(users));
-
-          // Create demo posts
-          const demoPosts = [
-            {
-              id: 1,
-              userId: 1,
-              image: "https://picsum.photos/600/600?random=1",
-              caption: "Ini adalah postingan demo pertama! #demo",
-              likes: 15,
-              likedBy: [2, 3],
-              comments: [
-                { userId: 2, username: "sarah_", text: "Keren!" },
-                { userId: 3, username: "john_doe", text: "Bagus sekali!" },
-              ],
-              timestamp: new Date().getTime() - 1000 * 60 * 60 * 24, // 1 day ago
-            },
-            {
-              id: 2,
-              userId: 1,
-              image: "https://picsum.photos/600/600?random=2",
-              caption:
-                "Postingan demo kedua dengan caption yang lebih panjang untuk menunjukkan bagaimana tampilannya di feed.",
-              likes: 8,
-              likedBy: [2],
-              comments: [],
-              timestamp: new Date().getTime() - 1000 * 60 * 60 * 2, // 2 hours ago
-            },
-            {
-              id: 3,
-              userId: 2,
-              image: "https://picsum.photos/600/600?random=3",
-              caption: "Sunset yang indah hari ini! 🌅 #sunset #nature",
-              likes: 42,
-              likedBy: [1, 3],
-              comments: [
-                { userId: 1, username: "demo", text: "Lokasi dimana?" },
-              ],
-              timestamp: new Date().getTime() - 1000 * 60 * 60 * 5, // 5 hours ago
-            },
-          ];
-
-          posts = demoPosts;
-          localStorage.setItem("posts", JSON.stringify(posts));
-
-          // Create demo chats
-          const demoChats = [
-            {
-              id: 1,
-              participants: [1, 2],
-              messages: [
-                {
-                  id: 1,
-                  senderId: 2,
-                  text: "Hai! Postingan kamu bagus sekali!",
-                  timestamp: new Date().getTime() - 1000 * 60 * 60 * 3,
-                },
-                {
-                  id: 2,
-                  senderId: 1,
-                  text: "Terima kasih! Postingan sunset kamu juga keren banget",
-                  timestamp: new Date().getTime() - 1000 * 60 * 60 * 2,
-                },
-                {
-                  id: 3,
-                  senderId: 2,
-                  text: "Lain kali kita jalan-jalan bareng ya, biar bisa foto-foto bersama",
-                  timestamp: new Date().getTime() - 1000 * 60 * 60 * 1,
-                },
-              ],
-            },
-            {
-              id: 2,
-              participants: [1, 3],
-              messages: [
-                {
-                  id: 1,
-                  senderId: 3,
-                  text: "Halo, saya tertarik dengan karya fotografi kamu",
-                  timestamp: new Date().getTime() - 1000 * 60 * 60 * 10,
-                },
-                {
-                  id: 2,
-                  senderId: 1,
-                  text: "Hai John! Terima kasih, karya kamu juga bagus-bagus",
-                  timestamp: new Date().getTime() - 1000 * 60 * 60 * 9,
-                },
-              ],
-            },
-          ];
-
-          chats = demoChats;
-          localStorage.setItem("chats", JSON.stringify(chats));
+          createDemoData();
         }
 
-        // Check current user and update UI
         updateUI();
-
-        // Load posts
         loadPosts();
       }
 
-      // Update UI based on authentication state
+      function createDemoData() {
+        const demoUser = {
+          id: 1,
+          email: "demo@example.com",
+          username: "demo",
+          password: "password",
+          avatar: "https://via.placeholder.com/100",
+          bio: "Ini adalah akun demo",
+          followers: 100,
+          following: 50,
+          isOnline: true,
+          followersList: [2, 3],
+          followingList: [2, 3],
+        };
+
+        const demoUser2 = {
+          id: 2,
+          email: "user2@example.com",
+          username: "sarah_",
+          password: "password",
+          avatar: "https://i.pravatar.cc/150?u=2",
+          bio: "Hai! Saya Sarah",
+          followers: 250,
+          following: 120,
+          isOnline: true,
+          followersList: [1, 3],
+          followingList: [1],
+        };
+
+        const demoUser3 = {
+          id: 3,
+          email: "user3@example.com",
+          username: "john_doe",
+          password: "password",
+          avatar: "https://i.pravatar.cc/150?u=3",
+          bio: "Photographer & traveler",
+          followers: 520,
+          following: 210,
+          isOnline: false,
+          followersList: [1, 2],
+          followingList: [1],
+        };
+
+        users.push(demoUser, demoUser2, demoUser3);
+        localStorage.setItem("users", JSON.stringify(users));
+
+        // Create demo posts
+        const demoPosts = [
+          {
+            id: 1,
+            userId: 1,
+            image: "https://picsum.photos/600/600?random=1",
+            caption: "Ini adalah postingan demo pertama! #demo",
+            likes: 15,
+            likedBy: [2, 3],
+            comments: [
+              { userId: 2, username: "sarah_", text: "Keren!" },
+              { userId: 3, username: "john_doe", text: "Bagus sekali!" },
+            ],
+            timestamp: new Date().getTime() - 1000 * 60 * 60 * 24,
+          },
+          {
+            id: 2,
+            userId: 1,
+            image: "https://picsum.photos/600/600?random=2",
+            caption:
+              "Postingan demo kedua dengan caption yang lebih panjang untuk menunjukkan bagaimana tampilannya di feed.",
+            likes: 8,
+            likedBy: [2],
+            comments: [],
+            timestamp: new Date().getTime() - 1000 * 60 * 60 * 2,
+          },
+          {
+            id: 3,
+            userId: 2,
+            image: "https://picsum.photos/600/600?random=3",
+            caption: "Sunset yang indah hari ini! 🌅 #sunset #nature",
+            likes: 42,
+            likedBy: [1, 3],
+            comments: [{ userId: 1, username: "demo", text: "Lokasi dimana?" }],
+            timestamp: new Date().getTime() - 1000 * 60 * 60 * 5,
+          },
+        ];
+
+        posts = demoPosts;
+        localStorage.setItem("posts", JSON.stringify(posts));
+
+        // Create demo chats
+        const demoChats = [
+          {
+            id: 1,
+            participants: [1, 2],
+            messages: [
+              {
+                id: 1,
+                senderId: 2,
+                text: "Hai! Postingan kamu bagus sekali!",
+                timestamp: new Date().getTime() - 1000 * 60 * 60 * 3,
+              },
+              {
+                id: 2,
+                senderId: 1,
+                text: "Terima kasih! Postingan sunset kamu juga keren banget",
+                timestamp: new Date().getTime() - 1000 * 60 * 60 * 2,
+              },
+              {
+                id: 3,
+                senderId: 2,
+                text: "Lain kali kita jalan-jalan bareng ya, biar bisa foto-foto bersama",
+                timestamp: new Date().getTime() - 1000 * 60 * 60 * 1,
+              },
+            ],
+          },
+          {
+            id: 2,
+            participants: [1, 3],
+            messages: [
+              {
+                id: 1,
+                senderId: 3,
+                text: "Halo, saya tertarik dengan karya fotografi kamu",
+                timestamp: new Date().getTime() - 1000 * 60 * 60 * 10,
+              },
+              {
+                id: 2,
+                senderId: 1,
+                text: "Hai John! Terima kasih, karya kamu juga bagus-bagus",
+                timestamp: new Date().getTime() - 1000 * 60 * 60 * 9,
+              },
+            ],
+          },
+        ];
+
+        chats = demoChats;
+        localStorage.setItem("chats", JSON.stringify(chats));
+      }
+
+      function closeAllOverlays() {
+        document
+          .querySelectorAll(".modal")
+          .forEach((m) => (m.style.display = "none"));
+        if (chatContainer) chatContainer.classList.remove("open");
+      }
+
       function updateUI() {
         if (currentUser) {
           authButtons.classList.add("hidden");
@@ -1615,16 +1616,13 @@
           chatToggle.classList.remove("hidden");
           profileLink.innerHTML = `<i class="fas fa-user"></i> ${currentUser.username}`;
 
-          // Load chat users
           loadChatUsers();
 
-          // Show content pages if logged in
           if (
             !homePage.classList.contains("hidden") ||
             !uploadPage.classList.contains("hidden") ||
             !profilePage.classList.contains("hidden")
           ) {
-            // Already on a content page
           } else {
             showPage("homePage");
           }
@@ -1641,28 +1639,22 @@
           }
         }
 
-        // Update profile page if needed
         if (!profilePage.classList.contains("hidden")) {
           loadProfilePage();
         }
 
-        // Update notification badge
         updateChatNotification();
       }
 
-      // Show a specific page
       function showPage(pageId) {
-        // Hide all pages
         loginPage.classList.add("hidden");
         registerPage.classList.add("hidden");
         homePage.classList.add("hidden");
         uploadPage.classList.add("hidden");
         profilePage.classList.add("hidden");
 
-        // Show the requested page
         document.getElementById(pageId).classList.remove("hidden");
 
-        // Update bottom navigation
         navItems.forEach((item) => {
           if (item.getAttribute("data-page") === pageId) {
             item.classList.add("active");
@@ -1671,7 +1663,6 @@
           }
         });
 
-        // Update top navigation
         navTopMenuItems.forEach((item) => {
           if (item.getAttribute("data-page") === pageId) {
             item.classList.add("active");
@@ -1680,21 +1671,17 @@
           }
         });
 
-        // Load page-specific content
         if (pageId === "homePage") {
           loadPosts();
         } else if (pageId === "profilePage") {
-          viewingProfileUserId = null; // Reset to current user's profile
+          viewingProfileUserId = null;
           loadProfilePage();
         }
       }
 
-      // Load posts into the feed
       function loadPosts() {
-        // Clear existing posts
         postsContainer.innerHTML = "";
 
-        // Sort posts by timestamp (newest first)
         const sortedPosts = [...posts].sort(
           (a, b) => b.timestamp - a.timestamp
         );
@@ -1705,7 +1692,6 @@
           return;
         }
 
-        // Create post elements
         sortedPosts.forEach((post) => {
           const user = users.find((u) => u.id === post.userId);
           if (!user) return;
@@ -1812,17 +1798,14 @@
           }
         });
 
-        // Add event listeners for like buttons
         document.querySelectorAll(".like-btn").forEach((btn) => {
           btn.addEventListener("click", handleLike);
         });
 
-        // Add event listeners for comment submission
         document.querySelectorAll(".comment-submit").forEach((btn) => {
           btn.addEventListener("click", handleCommentSubmit);
         });
 
-        // Add event listeners for comment input enter key
         document.querySelectorAll(".comment-input").forEach((input) => {
           input.addEventListener("keypress", (e) => {
             if (e.key === "Enter") {
@@ -1831,12 +1814,10 @@
           });
         });
 
-        // Add event listeners for delete comment buttons
         document.querySelectorAll(".post-comment-delete").forEach((btn) => {
           btn.addEventListener("click", handleDeleteComment);
         });
 
-        // Add event listeners for post image click
         document.querySelectorAll(".post-image").forEach((img) => {
           img.addEventListener("click", (e) => {
             const postId = parseInt(e.target.getAttribute("data-post-id"));
@@ -1845,7 +1826,6 @@
         });
       }
 
-      // Load profile page
       function loadProfilePage() {
         const profileUser = viewingProfileUserId
           ? users.find((u) => u.id === viewingProfileUserId)
@@ -1853,7 +1833,6 @@
 
         if (!profileUser) return;
 
-        // Update profile info
         document.getElementById("profileUsername").textContent =
           profileUser.username;
         document.getElementById("profileAvatar").src = profileUser.avatar;
@@ -1867,7 +1846,6 @@
         document.getElementById("followingCount").textContent =
           profileUser.following || 0;
 
-        // Show/hide follow button
         if (currentUser && currentUser.id !== profileUser.id) {
           followButton.classList.remove("hidden");
           if (isFollowing(currentUser, profileUser.id)) {
@@ -1883,7 +1861,6 @@
           followButton.classList.add("hidden");
         }
 
-        // Show/hide bio edit features
         if (currentUser && currentUser.id === profileUser.id) {
           profileBio.style.cursor = "pointer";
           profileBio.title = "Klik untuk mengedit bio";
@@ -1892,7 +1869,6 @@
           profileBio.title = "";
         }
 
-        // Load user's posts
         const userPosts = posts.filter((p) => p.userId === profileUser.id);
         profilePosts.innerHTML = "";
 
@@ -1927,36 +1903,33 @@
                 `;
           profilePosts.appendChild(postElement);
 
-          // Add click event to view post
           postElement.querySelector("img").addEventListener("click", () => {
             showPostDetail(post.id);
           });
-        });
 
-        if (currentUser && post.userId === currentUser.id) {
-          postElement
-            .querySelectorAll(".profile-post-delete-btn")
-            .forEach((btn) => {
-              btn.addEventListener("click", function (e) {
-                e.stopPropagation();
-                const postId = parseInt(btn.getAttribute("data-post-id"));
-                if (confirm("Yakin ingin menghapus postingan ini?")) {
-                  posts = posts.filter((p) => p.id !== postId);
-                  localStorage.setItem("posts", JSON.stringify(posts));
-                  loadProfilePage();
-                  if (typeof loadPosts === "function") loadPosts();
-                }
+          if (currentUser && post.userId === currentUser.id) {
+            postElement
+              .querySelectorAll(".profile-post-delete-btn")
+              .forEach((btn) => {
+                btn.addEventListener("click", function (e) {
+                  e.stopPropagation();
+                  const postId = parseInt(btn.getAttribute("data-post-id"));
+                  if (confirm("Yakin ingin menghapus postingan ini?")) {
+                    posts = posts.filter((p) => p.id !== postId);
+                    localStorage.setItem("posts", JSON.stringify(posts));
+                    loadProfilePage();
+                    if (typeof loadPosts === "function") loadPosts();
+                  }
+                });
               });
-            });
-        }
+          }
+        });
       }
 
-      // Check if current user is following another user
       function isFollowing(user, targetUserId) {
         return user.followingList && user.followingList.includes(targetUserId);
       }
 
-      // Handle follow button click
       function handleFollow() {
         if (!currentUser || !viewingProfileUserId) return;
 
@@ -1964,7 +1937,6 @@
         if (!targetUser) return;
 
         if (isFollowing(currentUser, viewingProfileUserId)) {
-          // Unfollow
           currentUser.followingList = currentUser.followingList.filter(
             (id) => id !== viewingProfileUserId
           );
@@ -1975,7 +1947,6 @@
           );
           targetUser.followers--;
         } else {
-          // Follow
           if (!currentUser.followingList) currentUser.followingList = [];
           currentUser.followingList.push(viewingProfileUserId);
           currentUser.following++;
@@ -1985,15 +1956,12 @@
           targetUser.followers++;
         }
 
-        // Update UI
         loadProfilePage();
 
-        // Save to localStorage
         localStorage.setItem("users", JSON.stringify(users));
         localStorage.setItem("currentUser", JSON.stringify(currentUser));
       }
 
-      // Show post detail in modal
       function showPostDetail(postId) {
         const post = posts.find((p) => p.id === postId);
         if (!post) return;
@@ -2044,13 +2012,11 @@
                 </div>
             `;
 
-        // Add event listeners for comment submission
         const commentSubmit = postDetail.querySelector(".comment-submit");
         if (commentSubmit) {
           commentSubmit.addEventListener("click", handleCommentSubmit);
         }
 
-        // Add event listener for comment input enter key
         const commentInput = postDetail.querySelector(".comment-input");
         if (commentInput) {
           commentInput.addEventListener("keypress", (e) => {
@@ -2063,14 +2029,11 @@
         modal.style.display = "flex";
       }
 
-      // Load chat users
       function loadChatUsers() {
         if (!currentUser) return;
 
-        // Clear existing users
         chatUsers.innerHTML = "";
 
-        // Get users that have chats with current user
         const chatPartners = [];
 
         chats.forEach((chat) => {
@@ -2085,14 +2048,12 @@
           }
         });
 
-        // Add other users that don't have chats yet
         users.forEach((user) => {
           if (
             user.id !== currentUser.id &&
             !chatPartners.some((u) => u.id === user.id) &&
             user.username !== "demo"
           ) {
-            // Exclude demo user for simplicity
             chatPartners.push(user);
           }
         });
@@ -2103,11 +2064,23 @@
           return;
         }
 
-        // Create user elements
         chatPartners.forEach((user) => {
           const userElement = document.createElement("div");
           userElement.className = "chat-user";
           userElement.setAttribute("data-user-id", user.id);
+
+          let followBtn = "";
+          if (!user.followersList) user.followersList = [];
+          if (!currentUser.followingList) currentUser.followingList = [];
+
+          if (currentUser.id !== user.id) {
+            if (currentUser.followingList.includes(user.id)) {
+              followBtn = `<button class="chat-follow-btn following" data-user-id="${user.id}">✓</button>`;
+            } else {
+              followBtn = `<button class="chat-follow-btn" data-user-id="${user.id}">+</button>`;
+            }
+          }
+
           userElement.innerHTML = `
                     <img src="${user.avatar}" alt="${
             user.username
@@ -2118,16 +2091,17 @@
                         ? '<div class="online-indicator"></div>'
                         : ""
                     }
+                    ${followBtn}
                 `;
 
-          userElement.addEventListener("click", () => {
-            // Set active user
+          userElement.addEventListener("click", (e) => {
+            if (e.target.classList.contains("chat-follow-btn")) return;
+
             document.querySelectorAll(".chat-user").forEach((u) => {
               u.classList.remove("active");
             });
             userElement.classList.add("active");
 
-            // Load chat messages
             loadChatMessages(user.id);
             currentChatUser = user;
           });
@@ -2135,7 +2109,38 @@
           chatUsers.appendChild(userElement);
         });
 
-        // Auto select first user if none selected
+        document.querySelectorAll(".chat-follow-btn").forEach((btn) => {
+          btn.addEventListener("click", function (e) {
+            e.stopPropagation();
+            const targetId = parseInt(this.getAttribute("data-user-id"));
+            const targetUser = users.find((u) => u.id === targetId);
+
+            if (!targetUser) return;
+
+            if (!currentUser.followingList) currentUser.followingList = [];
+            if (!targetUser.followersList) targetUser.followersList = [];
+
+            if (currentUser.followingList.includes(targetId)) {
+              currentUser.followingList = currentUser.followingList.filter(
+                (id) => id !== targetId
+              );
+              targetUser.followersList = targetUser.followersList.filter(
+                (id) => id !== currentUser.id
+              );
+              this.classList.remove("following");
+              this.innerHTML = "+";
+            } else {
+              currentUser.followingList.push(targetId);
+              targetUser.followersList.push(currentUser.id);
+              this.classList.add("following");
+              this.innerHTML = "✓";
+            }
+
+            localStorage.setItem("users", JSON.stringify(users));
+            localStorage.setItem("currentUser", JSON.stringify(currentUser));
+          });
+        });
+
         if (!currentChatUser && chatPartners.length > 0) {
           const firstUser = chatPartners[0];
           document
@@ -2144,14 +2149,11 @@
         }
       }
 
-      // Load chat messages for a specific user
       function loadChatMessages(userId) {
         if (!currentUser) return;
 
-        // Clear existing messages
         chatMessages.innerHTML = "";
 
-        // Find chat between current user and selected user
         const chat = chats.find(
           (c) =>
             c.participants.includes(currentUser.id) &&
@@ -2164,12 +2166,10 @@
           return;
         }
 
-        // Sort messages by timestamp
         const sortedMessages = [...chat.messages].sort(
           (a, b) => a.timestamp - b.timestamp
         );
 
-        // Deteksi pesan baru dari user lain
         let lastMessageId = chatMessages.getAttribute("data-last-message-id");
         let newLastMessageId = null;
         let foundNewMessage = false;
@@ -2200,10 +2200,8 @@
 
           chatMessages.appendChild(messageElement);
 
-          // Simpan id pesan terakhir
           if (idx === sortedMessages.length - 1) {
             newLastMessageId = message.id;
-            // Deteksi pesan baru dari user lain
             if (
               lastMessageId &&
               message.id != lastMessageId &&
@@ -2216,38 +2214,30 @@
           }
         });
 
-        // Jika ada pesan baru dari user lain, tampilkan toast notifikasi
         if (foundNewMessage && newMessageSender && newMessageText) {
           showToastNotification(
             `Pesan baru dari <b>${newMessageSender}</b>: ${newMessageText}`
           );
         }
 
-        // Update id pesan terakhir
         if (newLastMessageId) {
           chatMessages.setAttribute("data-last-message-id", newLastMessageId);
         }
 
-        // Scroll to bottom
         chatMessages.scrollTop = chatMessages.scrollHeight;
       }
 
-      // Fungsi untuk menampilkan toast notifikasi
       function showToastNotification(message) {
-        const toast = document.getElementById("toastNotification");
-        const toastMsg = document.getElementById("toastMessage");
-        toastMsg.innerHTML = message;
-        toast.style.display = "flex";
+        toastMessage.innerHTML = message;
+        toastNotification.style.display = "flex";
         setTimeout(() => {
-          toast.style.display = "none";
+          toastNotification.style.display = "none";
         }, 3500);
       }
 
-      // Send a chat message
       function sendChatMessage() {
         if (!currentUser || !currentChatUser || !chatInput.value.trim()) return;
 
-        // Find or create chat
         let chat = chats.find(
           (c) =>
             c.participants.includes(currentUser.id) &&
@@ -2263,7 +2253,6 @@
           chats.push(chat);
         }
 
-        // Add new message
         const newMessage = {
           id: new Date().getTime(),
           senderId: currentUser.id,
@@ -2273,32 +2262,24 @@
 
         chat.messages.push(newMessage);
 
-        // Clear input
         chatInput.value = "";
 
-        // Reload messages
         loadChatMessages(currentChatUser.id);
 
-        // Save to localStorage
         localStorage.setItem("chats", JSON.stringify(chats));
 
-        // Update notification badge
         updateChatNotification();
       }
 
-      // Update chat notification badge
       function updateChatNotification() {
         if (!currentUser) return;
 
         let unreadCount = 0;
 
-        // Count unread messages (for demo, we'll just count recent messages)
         chats.forEach((chat) => {
           if (chat.participants.includes(currentUser.id)) {
-            // Get the last message
             const lastMessage = chat.messages[chat.messages.length - 1];
             if (lastMessage && lastMessage.senderId !== currentUser.id) {
-              // If message is from last 5 minutes, consider it unread
               if (
                 new Date().getTime() - lastMessage.timestamp <
                 5 * 60 * 1000
@@ -2317,14 +2298,12 @@
         }
       }
 
-      // Check if current user liked a post
       function isPostLiked(post) {
         return (
           currentUser && post.likedBy && post.likedBy.includes(currentUser.id)
         );
       }
 
-      // Handle like button click
       function handleLike(e) {
         if (!currentUser) {
           alert("Anda harus login untuk menyukai postingan");
@@ -2336,10 +2315,8 @@
         const post = posts.find((p) => p.id === postId);
 
         if (post) {
-          // Initialize likedBy array if not exists
           if (!post.likedBy) post.likedBy = [];
 
-          // Toggle like
           if (isPostLiked(post)) {
             post.likes--;
             post.likedBy = post.likedBy.filter((id) => id !== currentUser.id);
@@ -2354,18 +2331,15 @@
             }, 500);
           }
 
-          // Update like count display
           const likesElement = e.currentTarget
             .closest(".post")
             .querySelector(".post-likes");
           likesElement.textContent = `${post.likes} suka`;
 
-          // Save to localStorage
           localStorage.setItem("posts", JSON.stringify(posts));
         }
       }
 
-      // Handle comment submission
       function handleCommentSubmit(e) {
         if (!currentUser) {
           alert("Anda harus login untuk berkomentar");
@@ -2386,9 +2360,8 @@
         const commentText = commentInput.value.trim();
 
         if (commentText && post) {
-          // Add new comment
           const newComment = {
-            id: new Date().getTime(), // Simple ID generation
+            id: new Date().getTime(),
             userId: currentUser.id,
             username: currentUser.username,
             text: commentText,
@@ -2396,22 +2369,18 @@
 
           post.comments.push(newComment);
 
-          // Clear input
           commentInput.value = "";
 
-          // Reload posts to show the new comment
           if (modal.style.display === "flex") {
             showPostDetail(postId);
           } else {
             loadPosts();
           }
 
-          // Save to localStorage
           localStorage.setItem("posts", JSON.stringify(posts));
         }
       }
 
-      // Handle delete comment
       function handleDeleteComment(e) {
         const postId = parseInt(e.currentTarget.getAttribute("data-post-id"));
         const commentId = parseInt(
@@ -2420,29 +2389,24 @@
         const post = posts.find((p) => p.id === postId);
 
         if (post) {
-          // Find comment index
           const commentIndex = post.comments.findIndex(
             (c) => c.id === commentId
           );
 
           if (commentIndex !== -1) {
-            // Remove comment
             post.comments.splice(commentIndex, 1);
 
-            // Reload posts
             if (modal.style.display === "flex") {
               showPostDetail(postId);
             } else {
               loadPosts();
             }
 
-            // Save to localStorage
             localStorage.setItem("posts", JSON.stringify(posts));
           }
         }
       }
 
-      // Format timestamp to relative time
       function formatTime(timestamp, short = false) {
         const now = new Date().getTime();
         const diff = now - timestamp;
@@ -2471,13 +2435,11 @@
         return new Date(timestamp).toLocaleDateString("id-ID");
       }
 
-      // Handle profile avatar edit
       function editProfileAvatar() {
         avatarUpload.value = "";
         avatarModal.style.display = "flex";
       }
 
-      // Save new profile avatar
       function saveProfileAvatar() {
         if (!avatarUpload.files || !avatarUpload.files[0]) {
           alert("Pilih gambar terlebih dahulu");
@@ -2488,13 +2450,11 @@
         reader.onload = function (e) {
           const newAvatar = e.target.result;
           currentUser.avatar = newAvatar;
-          // Update avatar di array users
           const userIndex = users.findIndex((u) => u.id === currentUser.id);
           if (userIndex !== -1) {
             users[userIndex].avatar = newAvatar;
           }
           document.getElementById("profileAvatar").src = newAvatar;
-          // Save to localStorage
           localStorage.setItem("users", JSON.stringify(users));
           localStorage.setItem("currentUser", JSON.stringify(currentUser));
           avatarModal.style.display = "none";
@@ -2503,7 +2463,6 @@
         reader.readAsDataURL(file);
       }
 
-      // Hapus foto profil
       function deleteProfileAvatar() {
         const defaultAvatar = "https://via.placeholder.com/100";
         currentUser.avatar = defaultAvatar;
@@ -2518,7 +2477,6 @@
         alert("Foto profil berhasil dihapus!");
       }
 
-      // Handle profile bio edit
       function editProfileBio() {
         if (!currentUser || viewingProfileUserId) return;
 
@@ -2527,58 +2485,50 @@
         profileBioActions.classList.remove("hidden");
       }
 
-      // Save profile bio
       function saveProfileBio() {
         if (!currentUser || viewingProfileUserId) return;
 
         currentUser.bio = profileBioEdit.value;
         profileBioText.textContent = currentUser.bio || "Tidak ada bio";
 
-        // Save to localStorage
         localStorage.setItem("users", JSON.stringify(users));
         localStorage.setItem("currentUser", JSON.stringify(currentUser));
 
         cancelProfileBioEdit();
       }
 
-      // Cancel profile bio edit
       function cancelProfileBioEdit() {
         profileBio.classList.remove("editing");
         profileBioActions.classList.add("hidden");
       }
 
-      // Simulate Google login/registration
       function handleGoogleAuth(isLogin = false) {
-        // Show loading state
         const button = isLogin ? googleLogin : googleRegister;
         const originalText = button.innerHTML;
         button.innerHTML = '<div class="spinner"></div>';
         button.disabled = true;
 
-        // Simulate API call delay
         setTimeout(() => {
-          // Generate random user data for demo
           const randomId = new Date().getTime();
           const randomNum = Math.floor(Math.random() * 1000);
           const googleEmail = `user${randomNum}@gmail.com`;
-          // Check if user already exists (by email)
+
           let existingUser = users.find(
             (u) => u.email === googleEmail && u.isGoogleUser
           );
+
           if (existingUser) {
-            // Always get the latest user data from users array
             currentUser = { ...existingUser };
             localStorage.setItem("currentUser", JSON.stringify(currentUser));
             updateUI();
             showPage("homePage");
             alert(`Selamat datang kembali, ${existingUser.username}!`);
           } else {
-            // Register new user
             const googleUser = {
               id: randomId,
               email: googleEmail,
               username: `google_user_${randomNum}`,
-              password: "", // No password for Google users
+              password: "",
               avatar: `https://i.pravatar.cc/150?u=${randomId}`,
               bio: "Pengguna Google",
               followers: Math.floor(Math.random() * 100),
@@ -2590,19 +2540,30 @@
             };
             users.push(googleUser);
             currentUser = { ...googleUser };
-            // Save to localStorage
+
             localStorage.setItem("users", JSON.stringify(users));
             localStorage.setItem("currentUser", JSON.stringify(currentUser));
+
             updateUI();
             showPage("homePage");
             alert(
               `Akun Google berhasil dibuat! Selamat datang, ${googleUser.username}`
             );
           }
-          // Restore button state
+
           button.innerHTML = originalText;
           button.disabled = false;
+
+          showStorageNotification();
         }, 1500);
+      }
+
+      function showStorageNotification() {
+        storageNotification.style.display = "block";
+
+        setTimeout(() => {
+          storageNotification.style.display = "none";
+        }, 5000);
       }
 
       // Event Listeners
@@ -2632,7 +2593,6 @@
         updateUI();
       });
 
-      // Google auth buttons
       googleLogin.addEventListener("click", () => {
         handleGoogleAuth(true);
       });
@@ -2641,7 +2601,6 @@
         handleGoogleAuth(false);
       });
 
-      // Chat toggle
       chatToggle.addEventListener("click", () => {
         chatContainer.classList.toggle("open");
         if (chatContainer.classList.contains("open")) {
@@ -2649,43 +2608,32 @@
         }
       });
 
-      // Chat close
       chatClose.addEventListener("click", () => {
         chatContainer.classList.remove("open");
       });
 
-      // Chat send message
       chatSend.addEventListener("click", sendChatMessage);
 
-      // Chat input enter key
       chatInput.addEventListener("keypress", (e) => {
         if (e.key === "Enter") {
           sendChatMessage();
         }
       });
 
-      // Profile avatar edit
       profileAvatarEdit.addEventListener("click", editProfileAvatar);
 
-      // Save profile avatar
       avatarSave.addEventListener("click", saveProfileAvatar);
-      document
-        .getElementById("avatarDelete")
-        .addEventListener("click", deleteProfileAvatar);
 
-      // Profile bio edit
+      avatarDelete.addEventListener("click", deleteProfileAvatar);
+
       profileBio.addEventListener("click", editProfileBio);
 
-      // Save profile bio
       profileBioSave.addEventListener("click", saveProfileBio);
 
-      // Cancel profile bio edit
       profileBioCancel.addEventListener("click", cancelProfileBioEdit);
 
-      // Follow button
       followButton.addEventListener("click", handleFollow);
 
-      // Top navigation menu
       navTopMenuItems.forEach((item) => {
         item.addEventListener("click", (e) => {
           e.preventDefault();
@@ -2707,13 +2655,11 @@
         });
       });
 
-      // Login form submission
       loginForm.addEventListener("submit", (e) => {
         e.preventDefault();
         const email = document.getElementById("loginEmail").value;
         const password = document.getElementById("loginPassword").value;
 
-        // Find user
         const user = users.find(
           (u) =>
             (u.email === email || u.username === email) &&
@@ -2721,9 +2667,7 @@
         );
 
         if (user) {
-          // Ambil data user terbaru dari array users (by id)
-          const freshUser = users.find((u) => u.id === user.id);
-          currentUser = freshUser ? { ...freshUser } : user;
+          currentUser = user;
           localStorage.setItem("currentUser", JSON.stringify(currentUser));
           updateUI();
           showPage("homePage");
@@ -2732,14 +2676,12 @@
         }
       });
 
-      // Register form submission
       registerForm.addEventListener("submit", (e) => {
         e.preventDefault();
         const email = document.getElementById("registerEmail").value;
         const username = document.getElementById("registerUsername").value;
         const password = document.getElementById("registerPassword").value;
 
-        // Check if user already exists
         if (users.some((u) => u.email === email)) {
           alert("Email sudah terdaftar");
           return;
@@ -2750,9 +2692,8 @@
           return;
         }
 
-        // Create new user
         const newUser = {
-          id: new Date().getTime(), // Simple ID generation
+          id: new Date().getTime(),
           email,
           username,
           password,
@@ -2768,15 +2709,15 @@
         users.push(newUser);
         currentUser = newUser;
 
-        // Save to localStorage
         localStorage.setItem("users", JSON.stringify(users));
         localStorage.setItem("currentUser", JSON.stringify(currentUser));
 
         updateUI();
         showPage("homePage");
+
+        showStorageNotification();
       });
 
-      // Upload form submission
       uploadForm.addEventListener("submit", (e) => {
         e.preventDefault();
 
@@ -2798,7 +2739,7 @@
         const reader = new FileReader();
         reader.onload = function (e) {
           const newPost = {
-            id: new Date().getTime(), // Simple ID generation
+            id: new Date().getTime(),
             userId: currentUser.id,
             image: e.target.result,
             caption,
@@ -2808,18 +2749,14 @@
             timestamp: new Date().getTime(),
           };
           posts.push(newPost);
-          // Save to localStorage
           localStorage.setItem("posts", JSON.stringify(posts));
-          // Reset form
           uploadForm.reset();
-          // Show home page
           showPage("homePage");
           alert("Postingan berhasil diunggah!");
         };
         reader.readAsDataURL(file);
       });
 
-      // Bottom navigation click
       navItems.forEach((item) => {
         item.addEventListener("click", () => {
           const page = item.getAttribute("data-page");
@@ -2840,12 +2777,10 @@
         });
       });
 
-      // Modal close
       modalClose.addEventListener("click", () => {
         modal.style.display = "none";
       });
 
-      // Close modal when clicking outside
       window.addEventListener("click", (e) => {
         if (e.target === modal || e.target === avatarModal) {
           modal.style.display = "none";
@@ -2853,7 +2788,6 @@
         }
       });
 
-      // Dark mode toggle
       themeToggle.addEventListener("click", () => {
         const isDark =
           document.documentElement.getAttribute("data-theme") === "dark";
@@ -2867,7 +2801,6 @@
         localStorage.setItem("theme", isDark ? "light" : "dark");
       });
 
-      // Check saved theme
       const savedTheme = localStorage.getItem("theme");
       if (savedTheme) {
         document.documentElement.setAttribute("data-theme", savedTheme);
@@ -2879,6 +2812,12 @@
 
       // Initialize the app
       init();
+
+      // Notifikasi keterbatasan localStorage
+      if (currentUser) {
+        setTimeout(showStorageNotification, 2000);
+      }
     </script>
   </body>
 </html>
+
